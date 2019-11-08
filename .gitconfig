@@ -1,0 +1,17 @@
+[user]
+  email = iam@mattrobertson.ca
+  name = Matthew Robertson
+[alias]
+  lg = log --color --graph --oneline --decorate
+  co = checkout
+  cm = commit --verbose
+  amend = commit --amend -C HEAD
+  pretty = log --pretty=oneline
+[core]
+  editor=vim
+  excludesfile = ~/.gitignore
+
+[color "status"]
+  changed = yellow
+  added = green
+  untracked = cyan
