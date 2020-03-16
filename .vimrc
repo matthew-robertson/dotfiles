@@ -1,9 +1,3 @@
-" Set up the CTRLP fuzzy finder
-set runtimepath^=~/.vim/bundle/ctrlp.vim
-let g:ctrlp_map = '<c-p>'
-let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_custom_ignore = 'node_modules'
-
 " Set up 2 space tabs
 set expandtab
 set tabstop=2
@@ -15,6 +9,7 @@ syntax enable
 set number
 set wildmenu
 set autoindent
+set background=dark
 
 " Set up statusline
 set laststatus=2
