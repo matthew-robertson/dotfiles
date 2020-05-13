@@ -7,6 +7,7 @@
   cm = commit --verbose
   amend = commit --amend -C HEAD
   pretty = log --pretty=oneline
+  clog = diff-tree --no-commit-id --name-only -r 
 [core]
   editor=vim
   excludesfile = ~/.gitignore
