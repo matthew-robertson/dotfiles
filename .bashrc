@@ -19,3 +19,10 @@ alias flint="lint -f"
 alias blint="lint -b"
 alias gits="git status"
 alias gitb="git branch"
+
+
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+

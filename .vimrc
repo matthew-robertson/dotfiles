@@ -1,10 +1,17 @@
 set nocompatible
 
+" Set up a mapleader other than \
+let mapleader = ","
+
 " Set up 4 space tabs
 set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
+
+" Encodings
+set encoding=utf8
+set ffs=unix,dos,mac
 
 " General quality of life stuff
 syntax enable
@@ -13,6 +20,13 @@ set noruler
 set wildmenu
 set autoindent
 set background=dark
+
+set showmatch
+set mat=2
+
+" search
+set ignorecase
+set hlsearch
 
 " Set up statusline, stolen from http://got-ravings.blogspot.com/2008/08/vim-pr0n-making-statuslines-that-own.html 
 set laststatus=2
@@ -43,6 +57,9 @@ function! s:ShowLongLines(width)
         echomsg "Usage: HighlightLongLines [natural number]"
     endif
 endfunction
+
+" clear highlights with leader+enter
+map <silent> <leader><cr> :noh<cr>
 
 " Set up autoclosing brackets
 inoremap " ""<left>
