@@ -26,3 +26,16 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+# Set up prompt
+gb() {
+        echo -n '(' && git symbolic-ref HEAD --short 2>/dev/null | tr -d '\n' && echo  -n ')'
+}
+git_branch() {
+        gb | sed 's/()//'
+}
+
+gitcolor() {
+  [[ -n $(git status --porcelain=v2 2>/dev/null) ]] && echo 31 || echo 32
+}
+
+export PS1="\u@\[\033[37m\]\w\[\033[\$(gitcolor)m\] \$(git_branch)\[\033[00m\]\$ "

@@ -25,7 +25,8 @@ set showmatch
 set mat=2
 
 " search
-set ignorecase
+set ignorecase " Ignore case when searching
+set smartcase  " ... Unless I explicitly use caps
 set hlsearch
 
 " Set up statusline, stolen from http://got-ravings.blogspot.com/2008/08/vim-pr0n-making-statuslines-that-own.html 
