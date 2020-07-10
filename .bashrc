@@ -26,6 +26,8 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+alias journal='vim ~/LabJournal/$(date "+%Y-%m-%d").md'
+
 # Set up prompt
 gb() {
         echo -n '(' && git symbolic-ref HEAD --short 2>/dev/null | tr -d '\n' && echo  -n ')'
