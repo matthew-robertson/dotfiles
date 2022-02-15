@@ -26,9 +26,12 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-journalDIR=~/LabJournal
 j_init() {
-  
+  journalDIR=~/LabJournal
+  dailyFile="$journalDIR/dailies/$(date '+%Y-%m-%d').md" 
+  weeklyFile="$journalDIR/weeklies/$(date '+%Y-week%U').md" 
+  monthlyFile="$journalDIR/monthlies/$(date '+%Y-%m').md" 
+    
   # Initialize journalling folder if not present
   if [ ! -d "$journalDIR" ];
   then
@@ -42,49 +45,49 @@ j_init() {
 
   # Start a new journal entries if necessary
   ## Monthly Entry
-  if [ ! -f "$journalDIR/monthlies/$(date '+%Y-%m').md" ]
+  if [ ! -f "$monthlyFile" ]
   then
     echo "No monthly entry present, initializing from template"
     if [ -f "$journalDIR/monthly_template.md" ]
     then
-      cp "$journalDIR/monthly_template.md" "$journalDIR/monthlies/$(date '+%Y-%m').md"
+      cp "$journalDIR/monthly_template.md" "$monthlyFile"
     else
       echo "No monthly template available, starting a blank entry."
-      touch "$journalDIR/dailies/$(date '+%Y-%m').md"
+      touch "$monthlyFile"
     fi
     echo "----------------------------------------"
   fi
 
   ## Weekly Entry
-  if [ ! -f "$journalDIR/weeklies/$(date '+%Y-week%U').md" ]
+  if [ ! -f "$weeklyFile" ]
   then
     echo "No weekly entry present, initializing from template"
     if [ -f "$journalDIR/weekly_template.md" ]
     then
-      cp "$journalDIR/weekly_template.md" "$journalDIR/weeklies/$(date '+%Y-week%U').md"
+      cp "$journalDIR/weekly_template.md" "$weeklyFile"
     else
       echo "No weekly template available, starting a blank entry."
-      touch "$journalDIR/dailies/$(date '+%Y-week%U').md"
+      touch "$weeklyFile"
     fi
     echo "----------------------------------------"
   fi
 
   ## Daily Entry
-  if [ ! -f "$journalDIR/dailies/$(date '+%Y-%m-%d').md" ]
+  if [ ! -f "$dailyFile" ]
   then
     echo "No daily entry present, initializing from template"
     if [ -f "$journalDIR/daily_template.md" ]
     then
-      cp "$journalDIR/daily_template.md" "$journalDIR/dailies/$(date '+%Y-%m-%d').md"
+      cp "$journalDIR/daily_template.md" "$dailyFile"
     else
       echo "No daily template available, starting a blank entry."
-      touch "$journalDIR/dailies/$(date '+%Y-%m-%d').md"
+      touch "$dailyFile"
     fi
     echo "----------------------------------------"
   fi
 
   # Open the journal entries
-  vim -o "$journalDIR/dailies/$(date '+%Y-%m-%d').md" "$journalDIR/weeklies/$(date '+%Y-week%U').md" "$journalDIR/monthlies/$(date '+%Y-%m').md" -c "wincmd H"
+  vim -o "$dailyFile" "$weeklyFile" "$monthlyFile" -c "wincmd H"
 }
 alias journal='j_init'
 
