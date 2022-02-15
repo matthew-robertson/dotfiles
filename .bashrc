@@ -26,6 +26,22 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+# If it doesn't already exist, create a file ($2) of type ($3) from its template ($1)
+file_from_template() {
+  if [ ! -f "$2" ]
+  then
+    echo "No $3 entry present, initializing from template"
+    if [ -f "$1" ]
+    then
+      cp "$1" "$2"
+    else
+      echo "No $3 template available, starting a blank entry."
+      touch "$2"
+    fi
+    echo "----------------------------------------"
+  fi
+}
+
 j_init() {
   journalDIR=~/LabJournal
   dailyFile="$journalDIR/dailies/$(date '+%Y-%m-%d').md" 
@@ -44,47 +60,9 @@ j_init() {
   fi
 
   # Start a new journal entries if necessary
-  ## Monthly Entry
-  if [ ! -f "$monthlyFile" ]
-  then
-    echo "No monthly entry present, initializing from template"
-    if [ -f "$journalDIR/monthly_template.md" ]
-    then
-      cp "$journalDIR/monthly_template.md" "$monthlyFile"
-    else
-      echo "No monthly template available, starting a blank entry."
-      touch "$monthlyFile"
-    fi
-    echo "----------------------------------------"
-  fi
-
-  ## Weekly Entry
-  if [ ! -f "$weeklyFile" ]
-  then
-    echo "No weekly entry present, initializing from template"
-    if [ -f "$journalDIR/weekly_template.md" ]
-    then
-      cp "$journalDIR/weekly_template.md" "$weeklyFile"
-    else
-      echo "No weekly template available, starting a blank entry."
-      touch "$weeklyFile"
-    fi
-    echo "----------------------------------------"
-  fi
-
-  ## Daily Entry
-  if [ ! -f "$dailyFile" ]
-  then
-    echo "No daily entry present, initializing from template"
-    if [ -f "$journalDIR/daily_template.md" ]
-    then
-      cp "$journalDIR/daily_template.md" "$dailyFile"
-    else
-      echo "No daily template available, starting a blank entry."
-      touch "$dailyFile"
-    fi
-    echo "----------------------------------------"
-  fi
+  file_from_template "$journalDIR/monthly_template.md" "$monthlyFile" "monthly"
+  file_from_template "$journalDIR/weekly_template.md" "$weeklyFile" "weekly"
+  file_from_template "$journalDIR/daily_template.md" "$dailyFile" "daily"
 
   # Open the journal entries
   vim -o "$dailyFile" "$weeklyFile" "$monthlyFile" -c "wincmd H"
