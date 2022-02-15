@@ -84,7 +84,7 @@ j_init() {
   fi
 
   # Open the journal entries
-  vim -O "$journalDIR/dailies/$(date '+%Y-%m-%d').md" "$journalDIR/weeklies/$(date '+%Y-week%U').md" "$journalDIR/monthlies/$(date '+%Y-%m').md"
+  vim -o "$journalDIR/dailies/$(date '+%Y-%m-%d').md" "$journalDIR/weeklies/$(date '+%Y-week%U').md" "$journalDIR/monthlies/$(date '+%Y-%m').md" -c "wincmd H"
 }
 alias journal='j_init'
 
