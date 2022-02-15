@@ -26,7 +26,67 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
-alias journal='vim ~/LabJournal/$(date "+%Y-%m-%d").md'
+journalDIR=~/LabJournal
+j_init() {
+  
+  # Initialize journalling folder if not present
+  if [ ! -d "$journalDIR" ];
+  then
+    echo "No journal present, starting one."
+    mkdir "$journalDIR"
+    mkdir "$journalDIR/monthlies"
+    mkdir "$journalDIR/weeklies"
+    mkdir "$journalDIR/dailies"
+    echo "----------------------------------------"
+  fi
+
+  # Start a new journal entries if necessary
+  ## Monthly Entry
+  if [ ! -f "$journalDIR/monthlies/$(date '+%Y-%m').md" ]
+  then
+    echo "No monthly entry present, initializing from template"
+    if [ -f "$journalDIR/monthly_template.md" ]
+    then
+      cp "$journalDIR/monthly_template.md" "$journalDIR/monthlies/$(date '+%Y-%m').md"
+    else
+      echo "No monthly template available, starting a blank entry."
+      touch "$journalDIR/dailies/$(date '+%Y-%m').md"
+    fi
+    echo "----------------------------------------"
+  fi
+
+  ## Weekly Entry
+  if [ ! -f "$journalDIR/weeklies/$(date '+%Y-week%U').md" ]
+  then
+    echo "No weekly entry present, initializing from template"
+    if [ -f "$journalDIR/weekly_template.md" ]
+    then
+      cp "$journalDIR/weekly_template.md" "$journalDIR/weeklies/$(date '+%Y-week%U').md"
+    else
+      echo "No weekly template available, starting a blank entry."
+      touch "$journalDIR/dailies/$(date '+%Y-week%U').md"
+    fi
+    echo "----------------------------------------"
+  fi
+
+  ## Daily Entry
+  if [ ! -f "$journalDIR/dailies/$(date '+%Y-%m-%d').md" ]
+  then
+    echo "No daily entry present, initializing from template"
+    if [ -f "$journalDIR/daily_template.md" ]
+    then
+      cp "$journalDIR/daily_template.md" "$journalDIR/dailies/$(date '+%Y-%m-%d').md"
+    else
+      echo "No daily template available, starting a blank entry."
+      touch "$journalDIR/dailies/$(date '+%Y-%m-%d').md"
+    fi
+    echo "----------------------------------------"
+  fi
+
+  # Open the journal entries
+  vim -O "$journalDIR/dailies/$(date '+%Y-%m-%d').md" "$journalDIR/weeklies/$(date '+%Y-week%U').md" "$journalDIR/monthlies/$(date '+%Y-%m').md"
+}
+alias journal='j_init'
 
 # Set up prompt
 gb() {
