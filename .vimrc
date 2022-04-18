@@ -21,6 +21,9 @@ set wildmenu
 set autoindent
 set background=dark
 
+" Only spellcheck markdown files
+autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_ca
+
 set showmatch
 set mat=2
 
