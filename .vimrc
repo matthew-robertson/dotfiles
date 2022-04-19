@@ -20,6 +20,14 @@ set noruler
 set wildmenu
 set autoindent
 set background=dark
+set splitbelow
+set splitright
+
+" Navigate splits without ctrl+w first.
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
 
 " Only spellcheck markdown files
 autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_ca
@@ -74,3 +82,7 @@ inoremap ( ()<left>
 inoremap () ()<left>
 inoremap [ []<left>
 inoremap [] []<left>
+
+" Don't clutter my dirs with swp and tmp files
+set backupdir=~/.tmp//
+set directory=~/.tmp//
