@@ -84,5 +84,8 @@ inoremap [ []<left>
 inoremap [] []<left>
 
 " Don't clutter my dirs with swp and tmp files
-set backupdir=~/.tmp//
-set directory=~/.tmp//
+if !isdirectory($HOME."/.tmp")
+    silent! execute "!mkdir ~/.tmp"
+endif
+set backupdir=~/.tmp
+set directory=~/.tmp
