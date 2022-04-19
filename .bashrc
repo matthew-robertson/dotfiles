@@ -1,31 +1,23 @@
-lint() {
-    local OPTIND lntr
-    local OPTIND fltr
-    fltr=$({ git diff --name-only '*.py' ; git diff --name-only --staged '*.py'; } | sort | uniq )
+# Quickly update dotfiles
+alias bu="source ~/.bashrc"
+alias bedit="vim ~/.bashrc"
+alias vedit="vim ~/.vimrc"
 
-    while getopts ":fbus" option; do
-        case $option in
-            f) lntr=flake8 ;;
-            b) lntr=black ;;
-            u) fltr=$(git diff --name-only '*.py') ;;
-            s) fltr=$(git diff --name-only --staged '*.py') ;;
-            ?) echo "invalid option: $OPTARG"; return 1 ;;
-        esac
-    done
-    $lntr $fltr
-}
-
-alias flint="lint -f"
-alias blint="lint -b"
+# Dev shortcuts
 alias gits="git status"
 alias gitb="git branch"
+alias capy="bundle exec cucumber -p mac-rc -p chrome"
 
+alias v="vim"
+alias vi="vim"
 
+# Easier backtracking
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
 alias .....="cd ../../../.."
 
+## create+use journals
 # If it doesn't already exist, create a file ($2) of type ($3) from its template ($1)
 file_from_template() {
   if [ ! -f "$2" ]
@@ -42,6 +34,7 @@ file_from_template() {
   fi
 }
 
+# actually launch the daily+weekly+monthly journal for the day
 j_init() {
   journalDIR=~/LabJournal
   dailyFile="$journalDIR/dailies/$(date '+%Y-%m-%d').md" 
