@@ -6,11 +6,13 @@ alias vedit="vim ~/.vimrc"
 # Dev shortcuts
 alias gits="git status"
 alias gitb="git branch"
-alias gitm="git co main"
+alias gitm="git co main; git pull"
+alias gitr="git rebase -i main"
 alias capy="bundle exec cucumber -p mac-rc -p chrome"
 
 alias v="vim"
 alias vi="vim"
+alias g="grep -ri"
 
 # Easier backtracking
 alias ..="cd .."
@@ -62,6 +64,13 @@ j_init() {
   vim -o "$dailyFile" "$weeklyFile" "$monthlyFile" -c "wincmd H"
 }
 alias journal='j_init'
+
+# Set up Git Branch completion
+if [ ! -f ~/.git-completion.bash ]; then
+  echo "Downlaoding Git autocomplete script"
+  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+fi
+. ~/.git-completion.bash
 
 # Set up prompt
 gb() {

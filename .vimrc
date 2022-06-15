@@ -3,11 +3,13 @@ set nocompatible
 " Set up a mapleader other than \
 let mapleader = ","
 
-" Set up 4 space tabs
+" Set up 2 space tabs
 set expandtab
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
+" ...Unless we're in a python file
+autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4
 
 " Encodings
 set encoding=utf8
@@ -22,6 +24,8 @@ set autoindent
 set background=dark
 set splitbelow
 set splitright
+nmap k gk
+nmap j gj
 
 " Navigate splits without ctrl+w first.
 nnoremap <C-H> <C-W><C-H>
@@ -29,8 +33,9 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 
-" Only spellcheck markdown files
-autocmd BufRead,BufNewFile *.md setlocal spell spelllang=en_ca
+" Only spellcheck markdown files, and let autocompletion help out
+autocmd BufRead,BufNewFile *.md,*.txt setlocal spell spelllang=en_ca
+set complete+=kspell
 
 set showmatch
 set mat=2

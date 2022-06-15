@@ -3,6 +3,7 @@
   name = Matthew Robertson
 [alias]
   lg = log --color --graph --oneline --decorate
+  pa = push --force-with-lease
   co = checkout
   cm = commit --verbose
   amend = commit --amend -C HEAD
