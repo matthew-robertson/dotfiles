@@ -6,9 +6,13 @@ alias vedit="vim ~/.vimrc"
 # Dev shortcuts
 alias gits="git status"
 alias gitb="git branch"
+alias gitde="gitb -d"
+alias gitd="git diff"
 __git_complete gitb _git_branch
+__git_complete gitde _git_branch
 alias gitm="git co main; git pull"
 alias gitr="git rebase -i main"
+alias gitur="gitm; git co -; gitr"
 alias capy="bundle exec cucumber -p mac-rc -p chrome"
 
 alias v="vim"
