@@ -1,3 +1,10 @@
+# Set up Git Branch completion in case we don't have the file
+if [ ! -f ~/.git-completion.bash ]; then
+  echo "Downlaoding Git autocomplete script"
+  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+fi
+. ~/.git-completion.bash
+
 # Quickly update dotfiles
 alias bu="source ~/.bashrc"
 alias bedit="vim ~/.bashrc"
@@ -10,6 +17,7 @@ alias gitde="gitb -d"
 alias gitd="git diff"
 __git_complete gitb _git_branch
 __git_complete gitde _git_branch
+__git_complete checkout _git_branch
 alias gitm="git co main; git pull"
 alias gitr="git rebase -i main"
 alias gitur="gitm; git co -; gitr"
@@ -69,13 +77,6 @@ j_init() {
   vim -o "$dailyFile" "$weeklyFile" "$monthlyFile" -c "wincmd H"
 }
 alias journal='j_init'
-
-# Set up Git Branch completion
-if [ ! -f ~/.git-completion.bash ]; then
-  echo "Downlaoding Git autocomplete script"
-  curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
-fi
-. ~/.git-completion.bash
 
 # Set up prompt
 gb() {
